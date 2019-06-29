@@ -1,3 +1,5 @@
+
+/*
 const Pool = require('pg').Pool
 const dotenv = require('dotenv');
 dotenv.config();
@@ -9,8 +11,10 @@ const pool = new Pool({
 pool.on('connect', () => {
     console.log('connected to the db');
   });
-  const BOOK_LIST_FOR_RENTING = 'select book_id,book_name,book_author,category_name as category from public.book b inner join public.category cat on cat.category_id=b.category_id where client_id is null and rent_date is null'
 
+const BOOK_LIST_FOR_RENTING = 'select book_id,book_name,book_author,category_name as category from public.book b inner join public.category cat on cat.category_id=b.category_id where client_id is null and rent_date is null'
+//const BOOK_LIST_FOR_CLIENT = 'select book_id,book_name,book_author,rent_date,no_of_release_days,init_days_price,fixed_days_price,category_name as category from public.book b inner join public.category cat on cat.category_id=b.category_id where client_id='
+//const getBookListForClient()
 const getBookList = (request, response) => {
     console.log("in get users");
     pool.query(BOOK_LIST_FOR_RENTING, (error, results) => {
@@ -24,3 +28,4 @@ const getBookList = (request, response) => {
   module.exports = {
     getBookList
   }
+  */
