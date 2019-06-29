@@ -1,15 +1,10 @@
 const Pool = require('pg').Pool
+const dotenv = require('dotenv');
+dotenv.config();
+
 const pool = new Pool({
-    connectionString: "postgres://postgres:123456789@127.0.0.1:5432/bookRentelDB"
-    /*
-  user: 'postgres',
-  host: 'localhost',
-  database: 'api',
-  password: '123456789',
-  port: 5432
-  */
+    connectionString: process.env.DATABASE_URL
 })
-//postgres://postgres@127.0.0.1:5432/bookRentelDB
 pool.on('connect', () => {
     console.log('connected to the db');
   });
