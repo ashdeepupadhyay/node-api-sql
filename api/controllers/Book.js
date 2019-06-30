@@ -21,9 +21,14 @@ exports.getBookList = (request, response,next) => {
     console.log("in get users");
     pool.query(BOOK_LIST_FOR_RENTING, (error, results) => {
       if (error) {
-        throw errors
-      }
-      response.status(200).json(results.rows)
+        res.status(500).json({
+          error:err
+          });
+        }
+      response.status(200).json({
+        count:results.rows.length,
+        docs:results.rows
+      })
     })
   }
 
@@ -34,9 +39,14 @@ exports.getBookList = (request, response,next) => {
     }
       pool.query(query, (error, results) => {
         if (error) {
-          throw errors
-        }
-        res.status(200).json(results.rows)
+          res.status(500).json({
+            error:err
+            });
+          }
+        res.status(200).json({
+          count:results.rows.length,
+          docs:results.rows,
+        })
       })
   }
 
@@ -46,8 +56,10 @@ exports.updateBookReturn = (req,res,next)=>{
         values:[req.body.bookid]
     }
     pool.query(query,(error,results)=>{
-        if(error){
-            throw errors
+      if (error) {
+        res.status(500).json({
+          error:err
+          });
         }
         res.status(200).json(results.rows)
     })
@@ -67,8 +79,10 @@ console.log(req.body.clientid);
         values:[today,req.body.clientid,req.body.bookid]
     }
     pool.query(query,(error,results)=>{
-        if(error){
-            throw error
+      if (error) {
+        res.status(500).json({
+          error:err
+          });
         }
         res.status(200).json(results.rows);
     })
